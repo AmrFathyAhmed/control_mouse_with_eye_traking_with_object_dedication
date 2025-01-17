@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import mediapipe as mp
+
 def draw_boxes(canvas, box_positions, box_colors, box_width, box_height):
     """Draw boxes on the canvas with their respective colors."""
     for i, (x, y) in enumerate(box_positions):
@@ -31,7 +32,11 @@ def get_iris_landmarks(eye_coords):
     avg_x = sum(x for x, y in iris_coords) / len(iris_coords)
     avg_y = sum(y for x, y in iris_coords) / len(iris_coords)
     return avg_x, avg_y
+
 def calculate_ear(eye_coords):
+    """
+    Calculate the Eye Aspect Ratio (EAR) for blink detection.
+    """
     A = np.linalg.norm(np.array(eye_coords[1]) - np.array(eye_coords[5]))  # Vertical distance
     B = np.linalg.norm(np.array(eye_coords[2]) - np.array(eye_coords[4]))  # Vertical distance
     C = np.linalg.norm(np.array(eye_coords[0]) - np.array(eye_coords[3]))  # Horizontal distance
